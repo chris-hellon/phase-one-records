@@ -2,7 +2,7 @@
 
 ![PaperStreetSoap banner image](https://paperstreetsoap.blob.core.windows.net/site/phaseonerecords.png)
 
-https://paperstreetsoap.azurewebsites.net/
+https://phaseonerecords-dev-as.azurewebsites.net/
 
 A .NET 6 MVC Web App for a client promoting and selling their online trading resources.
 The client requested a platform where the user could register, select a package and purchase the package using Bitcoin.
