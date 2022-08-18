@@ -4,27 +4,24 @@
 
 https://phaseonerecords-dev-as.azurewebsites.net/
 
-A .NET 6 MVC Web App for a client promoting and selling their online trading resources.
-The client requested a platform where the user could register, select a package and purchase the package using Bitcoin.
-Upon successful payment, the user would have access to members only content, including embedded videos, live trading data and downloadable resources.
+A .NET Core 3.1 MVC Touch Screen App for a client promoting and selling their in store & Shopify record collection.
+The client requested a platform where they could have a large touch screen device in their store, which would have the functionality to browse their Shopify products collection. Upon selecting an album, the app would link to Spotify to allow the user to listen to the selected album.
+
+The app consumes a Shopify Graph QL REST API, as well as a Spotify REST API.
 
 Features of the Web App includes:
 
-* A custom Content Management System
-* User login, registration and subscription payment, handled consuming a Bitcoin Node Rest API client
-* An Azure SQL database
-* An Azure CDN with Storage Containers and Blobs to serve all JS, CSS and Images
-* Notification emails sent out to users whenever new content is uploaded using a Google SMTP Client
+* Full touch screen keyboard
+* Ability to search, filter by genre, multiple sorting
+* Consumption of a Shopify Graph QL REST API
+* Consumption of a Spotify REST API
+* Storing Shopify response in session for faster loading
 
 Tech Stack inludes:
 
-* .NET 6
+* .NET Core 3.1
 * C#
 * MVC
-* Azure SQL
-* Azure CDN
-* Dapper
 * RestShap API
 * Rollbar Error Handling
 * jQuery
-* Bootstrap 5
