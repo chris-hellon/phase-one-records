@@ -1,0 +1,256 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+@font-face {
+    font-family: 'NeutraDispMedium';
+    src: url('../assets/fonts/NeutraDispMedium.eot');
+    src: url('../assets/fonts/NeutraDispMedium.eot') format('embedded-opentype'), url('../assets/fonts/NeutraDispMedium.woff2') format('woff2'), url('../assets/fonts/NeutraDispMedium.woff') format('woff'), url('../assets/fonts/NeutraDispMedium.ttf') format('truetype'), url('../assets/fonts/NeutraDispMedium.svg#NeutraDispMedium') format('svg');
+}
+
+@font-face {
+    font-family: 'NeutraDispTitling';
+    src: url('../assets/fonts/NeutraDispTitling.eot');
+    src: url('../assets/fonts/NeutraDispTitling.eot') format('embedded-opentype'), url('../assets/fonts/NeutraDispTitling.woff2') format('woff2'), url('../assets/fonts/NeutraDispTitling.woff') format('woff'), url('../assets/fonts/NeutraDispTitling.ttf') format('truetype'), url('../assets/fonts/NeutraDispTitling.svg#NeutraDispTitling') format('svg');
+}
+
+html {
+    position: relative;
+    font-size: 1em;
+    height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    color: white;
+    height: 100%;
+    width: 100%;
+    font-family: 'NeutraDispMedium';
+}
+
+/*fonts*/
+.titling, .span-titling span {
+    font-family: 'NeutraDispTitling';
+    text-decoration: none;
+}
+
+.span-titling {
+    font-family: 'NeutraDispMedium' !important;
+}
+
+a.titling {color:#fff;}
+
+.titling:hover {
+    text-decoration: none;
+}
+
+.btn-primary {
+    background-color: #72AAD9 !important;
+    font-family: 'NeutraDispTitling';
+    color: #000000;
+    border-radius: 5px;
+    font-size: 2rem;
+    outline: 2px solid #000000;
+    outline-offset: -5px;
+    border: none;
+    padding: 7px 40px;
+    transition: 0.3s;
+    display: inline-block;
+    line-height: 2rem;
+}
+
+    .btn-primary:hover, .btn-primary:focus, .btn-primary.selected {
+        background-color: #ffffff;
+        color: #000000;
+        text-decoration: none;
+        outline: 2px solid #000000;
+    }
+
+    .btn-primary.selected {
+        background-color: #ffffff !important;
+    }
+
+/*main content*/
+
+#content-wrapper {
+    display: table;
+    width: 100%;
+    height: 100%;
+}
+
+header {
+    height: 100px;
+    position: relative;
+    display: table-row;
+}
+
+.header-logo-img {
+    height: 184px;
+    margin-top: 25px;
+}
+
+#sub-header {
+    display: table-row;
+    position: relative;
+    height: 0px;
+}
+
+nav {
+    /*background: url('../assets/UI/UI_BG.png');*/
+    height: 184px;
+}
+
+form {
+    display: none;
+}
+
+.scrollable-container {
+    overflow: auto;
+    height: 100%;
+}
+
+#content {
+    position: relative;
+    width: 100%;
+    display: table-row;
+}
+
+#static-background {
+    height: 100vh;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    position: fixed;
+    background: url('../assets/UI/UI_BG.png');
+}
+
+h1 {
+    margin: 0px;
+}
+
+#back-button, .back-to-top, #search-button {
+    padding: 7px 10px;
+}
+
+    #back-button img, .back-to-top img, #search-button img {
+        height: 2rem;
+    }
+
+    #back-button { margin-right:15px; }
+
+    .navbar .container div {
+        padding: 0px;
+        margin: 0px;
+    }
+/*scrollbar*/
+::-webkit-scrollbar {
+    width: 14px;
+}
+
+::-webkit-scrollbar-thumb {
+    border: 4px solid rgba(0, 0, 0, 0);
+    background-clip: padding-box;
+    border-radius: 9999px;
+    background-color: #ffffff;
+}
+
+/*classes*/
+.img-thumbnail {
+    background-color: transparent;
+    border: none;
+    border-radius: unset;
+    padding: 0px;
+}
+
+.light-blue-fg {
+    color: #61ABDE;
+}
+
+.light-blue-bg {
+    background-color: #61ABDE;
+    color: #000000;
+}
+
+.container-fluid {
+    padding: 0px;
+}
+
+.filter-buttons-container button {
+    width: 100%;
+}
+
+.js-browse-filter-genre, .js-browse-filter-sorting {
+    font-size: 1rem;
+}
+
+.loading {
+    background: transparent url('../assets/UI/loadingimage.gif') center no-repeat;
+    width: 100%;
+    min-height: 100px;
+    background-size: 100px;
+}
+
+
+.back-to-top { position:fixed; bottom:20px; right:50px; z-index:10; cursor:pointer; display:none; }
+
+body .loader-container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0%;
+    left: 0%;
+    z-index: 10000000;
+    background: url('../assets/UI/UI_BG.png');
+}
+
+body .loader {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    margin-top: -20px;
+    margin-left: -20px;
+    top: 50%;
+    left: 50%;
+}
+
+body .double-bounce1,
+body .double-bounce2 {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-image: radial-gradient(#61abde 5%, #61abde 75%);
+    background-position: top left,center center,center center;
+    background-size: 100% 200%;
+    opacity: 0.6;
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-animation: sk-bounce 2s infinite ease-in-out;
+    animation: sk-bounce 2s infinite ease-in-out;
+}
+
+body .double-bounce2 {
+    -webkit-animation-delay: -1s;
+    animation-delay: -1s;
+}
+
+@-webkit-keyframes sk-bounce {
+    0%, 100% {
+        -webkit-transform: scale(0);
+    }
+
+    50% {
+        -webkit-transform: scale(1);
+    }
+}
+
+@keyframes sk-bounce {
+    0%, 100% {
+        transform: scale(0);
+        -webkit-transform: scale(0);
+    }
+
+    50% {
+        transform: scale(1);
+        -webkit-transform: scale(1);
+    }
+}

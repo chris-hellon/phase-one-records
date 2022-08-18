@@ -1,0 +1,20 @@
+﻿@model List<PhaseOneRecords.Models.ArtistModel>
+
+@for (int i = 0; i < Model.Count; i++)
+{
+    var artist = Model[i];
+    var imageUrl = artist.Images != null && artist.Images.Count > 0 ? artist.Images.First() : "";
+    decimal? price = artist.Prices != null && artist.Prices.Count > 0 ? artist.Prices.First() : new decimal?();
+
+    <div class="row mt-3 js-artist-row">
+        <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
+            <img class="img-thumbnail loading" src="@imageUrl" />
+        </div>
+        <div class="col-lg-8 col-md-8 col-xs-8 col-sm-8">
+            <h4><span class="light-blue-fg">BAND // </span><a class="titling" href="@Url.Action("Index", "Browse", new { @searchArtist = artist.ArtistName })">@artist.ArtistName.ToUpper()</a></h4>
+            <h4><span class="light-blue-fg">ALBUM // </span><a class="titling" href="@Url.Action("Index", "Browse", new { @searchAlbum = artist.AlbumName, @searchArtist = artist.ArtistName })">@artist.AlbumName.ToUpper()</a></h4>
+            <h4><span class="light-blue-fg">PRICE // </span><span class="titling">£@price</span></h4>
+            <p>@artist.Description</p>
+        </div>
+    </div>
+} 

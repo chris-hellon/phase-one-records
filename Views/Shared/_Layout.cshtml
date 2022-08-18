@@ -1,0 +1,175 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - PhaseOneRecords</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/main.css" />
+    <link rel="stylesheet" href="~/css/global.css" />
+
+</head>
+<body>
+
+
+    <div id="static-background" class="content-container">
+    </div>
+    <div class="content-container">
+        <div class="content-border-top">
+            <div class="content-corner top-left">
+                <div class="content-box one"></div>
+                <div class="content-box two"></div>
+                <div class="content-box three"></div>
+                <div class="content-box four"></div>
+                <div class="content-box five"></div>
+                <div class="content-box six"></div>
+                <div class="content-box seven"></div>
+                <div class="content-box eight"></div>
+                <div class="content-box nine"></div>
+            </div>
+            <div class="content-border top">
+                <div class="border-top one"></div>
+                <div class="border-top two"></div>
+                <div class="border-top three"></div>
+            </div>
+            <div class="content-corner top-right">
+                <div class="content-box one"></div>
+                <div class="content-box two"></div>
+                <div class="content-box three"></div>
+                <div class="content-box four"></div>
+                <div class="content-box five"></div>
+                <div class="content-box six"></div>
+                <div class="content-box seven"></div>
+                <div class="content-box eight"></div>
+                <div class="content-box nine"></div>
+            </div>
+        </div>
+        <div class="content-inner">
+            <div class="content-border-left">
+                <div class="border-col one"></div>
+                <div class="border-col two"></div>
+                <div class="border-col three"></div>
+            </div>
+            <div class="content-body">
+                <div class="cover top-left"></div>
+                <div class="cover top-right"></div>
+                <div class="cover bottom-left"></div>
+                <div class="cover bottom-right"></div>
+                <div id="content-wrapper">
+                    @{
+                        var currentController = ViewContext.RouteData.Values.ContainsKey("controller") ? ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant() : null;
+                        var currentAction = ViewContext.RouteData.Values.ContainsKey("action") ? ViewContext.RouteData.Values["action"].ToString().ToLowerInvariant() : null;
+
+                        bool pageIsFilter = currentController != null && currentController == "browse" && currentAction != null && currentAction == "filter";
+                        bool pageIsBrowse = currentController != null && currentController == "browse" && currentAction != null && (currentAction == "index" || currentAction == "applyfilter");
+
+                        bool pageArtistFilter = ViewContext.HttpContext.Request.Query.ContainsKey("searchArtist");
+                        bool pageAlbumFilter = ViewContext.HttpContext.Request.Query.ContainsKey("searchAlbum");
+                        bool pageSearchFilter = ViewContext.HttpContext.Request.Query.ContainsKey("searchTerm");
+
+                        bool albumPage = pageAlbumFilter && pageArtistFilter;
+                        bool artistPage = pageArtistFilter;
+                        bool searchApplied = pageSearchFilter;
+
+                        <header>
+                            <nav class="navbar navbar-expand-sm navbar-toggleable-sm">
+                                <div class="container">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-left">
+                                        @if (currentController != "home" && !pageIsBrowse || pageArtistFilter || pageAlbumFilter)
+                                        {
+                                            <button class="btn-primary" id="back-button" type="button" onclick="window.history.back()"><img src="~/assets/UI/UI_Icon_Arrow.png" /></button>
+                                        }
+                                        <a class="btn-primary" id="search-button" asp-area="" asp-controller="Browse" asp-action="Search"><img src="~/assets/UI/UI_Icon_Search.png" /></a>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">
+                                        <a asp-action="landing" asp-controller="browse">
+                                            <img src="~/assets/UI/UI_Logo_M.png" class="header-logo-img" />
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right">
+                                        @if (pageIsBrowse && !albumPage)
+                                        {
+                                            <a class="btn-primary" href="@Url.Action("Filter", "Browse", new { @searchArtist = pageArtistFilter ?  ViewContext.HttpContext.Request.Query["searchArtist"].ToString() : null, @searchTerm = searchApplied ? ViewContext.HttpContext.Request.Query["searchTerm"].ToString() : null })">Filter</a>
+                                        }
+                                        else if (albumPage)
+                                        {
+                                            <a class="btn-primary" href="@Url.Action("Index", "Browse")">Browse</a>
+                                        }
+
+                                        @if (pageIsFilter)
+                                        {
+                                            <button class="btn-primary btn-apply" type="button" onclick="submitFilterForm(); return false;">Apply</button>
+                                        }
+                                    </div>
+                                </div>
+                            </nav>
+                        </header>
+                        @RenderBody()
+                    }
+                </div>
+            </div>
+            <div class="content-border-right">
+                <div class="border-col one"></div>
+                <div class="border-col two"></div>
+                <div class="border-col three"></div>
+            </div>
+        </div>
+        <div class="content-border-bottom">
+            <div class="content-corner bottom-left">
+                <div class="content-box one"></div>
+                <div class="content-box two"></div>
+                <div class="content-box three"></div>
+                <div class="content-box four"></div>
+                <div class="content-box five"></div>
+                <div class="content-box six"></div>
+                <div class="content-box seven"></div>
+                <div class="content-box eight"></div>
+                <div class="content-box nine"></div>
+            </div>
+            <div class="content-border bottom">
+                <div class="border-top one"></div>
+                <div class="border-top two"></div>
+                <div class="border-top three"></div>
+            </div>
+            <div class="content-corner bottom-right">
+                <div class="content-box one"></div>
+                <div class="content-box two"></div>
+                <div class="content-box three"></div>
+                <div class="content-box four"></div>
+                <div class="content-box five"></div>
+                <div class="content-box six"></div>
+                <div class="content-box seven"></div>
+                <div class="content-box eight"></div>
+                <div class="content-box nine"></div>
+            </div>
+        </div>
+    </div>
+
+    <button type="button" class="back-to-top btn-primary">
+        <img src="~/assets/UI/UI_Icon_Arrow_Up.png" />
+    </button>
+
+    <!-- Page loader start -->
+    <div class="loader-container">
+        <div class="loader">
+            <div class="double-bounce1"></div>
+            <div class="double-bounce2"></div>
+        </div>
+    </div>
+    <!-- Page loader end -->
+    @*<section id="static-background"></section>*@
+
+
+    @*<footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2021 - PhaseOneRecords - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        </footer>*@
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @*<script src="~/js/site.js" asp-append-version="true"></script>*@
+    <script src="~/js/main.js" asp-append-version="true"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

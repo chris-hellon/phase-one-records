@@ -1,0 +1,214 @@
+﻿#content-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    height: auto;
+
+    header {
+        z-index: 1;
+        /*     position: sticky;
+        top: 0;*/
+        /* background: url('../../assets/UI/UI_BG.png');
+        margin-top: 48px;*/
+        background-position-y: -48px;
+        height: auto;
+        display: block;
+
+        @media only screen and (max-width:600px) {
+            min-height: 330px;
+        }
+    }
+
+    section {
+        &#sub-header {
+            display: unset;
+            height: auto;
+        }
+    }
+
+    main {
+        &#content {
+            display: unset;
+            position: relative;
+        }
+    }
+
+    .container {
+
+        .vertical-center {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: ~"calc(100vh - 90px)";
+        }
+
+        .btn-apply {
+            @media only screen and (max-width:760px) {
+                width: 70%;
+                margin-right: 15%;
+            }
+        }
+
+        .button-flex {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+
+            button.btn-primary, a.btn-primary {
+                padding: 0;
+                height: 50px;
+                width: 210px;
+                min-width: ~"calc(25% - 20px)";
+                margin: 10px;
+                line-height: inherit;
+                /*display: flex;
+                text-align: center;
+                justify-content: center;
+                flex-direction: column;*/
+
+
+                span {
+                    display: block;
+                    width: 100%;
+                    text-align: center;
+                    margin-top:4px;
+                }
+            }
+
+            img {
+                max-height: 20vh;
+                min-height: 200px;
+                margin-top: 50px;
+                margin-bottom: 50px;
+            }
+
+            .no-results {
+                width: 100%;
+                margin-top: 50px;
+                text-align: center;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                flex-wrap: wrap;
+
+                p {
+                    font-size: 30px;
+                    width: 100%;
+                    text-align: center;
+                }
+
+                a.btn-primary {
+                    width: 400px;
+                    margin-left: ~"calc(50% - 200px;)"
+                }
+            }
+        }
+    }
+}
+
+
+@keyframes flickerAnimation {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-o-keyframes flickerAnimation {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes flickerAnimation {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes flickerAnimation {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.animate-flicker {
+    -webkit-animation: flickerAnimation 5s infinite;
+    -moz-animation: flickerAnimation 5s infinite;
+    -o-animation: flickerAnimation 5s infinite;
+    animation: flickerAnimation 5s infinite;
+}
+
+
+.animate-rotate {
+    -webkit-animation-name: spinner;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-duration: 10s;
+    animation-name: spinner;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-duration: 10s;
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    max-height:200px;
+}
+
+/* WebKit and Opera browsers */ @-webkit-keyframes spinner {
+    from {
+        -webkit-transform: rotateY(0deg);
+    }
+
+    to {
+        -webkit-transform: rotateY(-360deg);
+    }
+}
+/* all other browsers */
+@keyframes spinner {
+    from {
+        -moz-transform: rotateY(0deg);
+        -ms-transform: rotateY(0deg);
+        transform: rotateY(0deg);
+    }
+
+    to {
+        -moz-transform: rotateY(-360deg);
+        -ms-transform: rotateY(-360deg);
+        transform: rotateY(-360deg);
+    }
+}

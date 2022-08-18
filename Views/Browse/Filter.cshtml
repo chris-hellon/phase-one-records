@@ -1,0 +1,76 @@
+﻿@model PhaseOneRecords.Models.BrowseFilterViewModel
+
+@{
+    ViewData["Title"] = "Filter - Browse";
+}
+
+<section id="sub-header">
+
+    @{ await Html.RenderPartialAsync("~/Views/Shared/_BannerTitle.cshtml", "Sort"); }
+
+    <div class="container mt-3 mb-3 filter-buttons-container">
+        <div class="row">
+            <div class="button-flex">
+                <button type="button" class="btn-primary js-browse-filter-sorting" data-sort-value="sortKey: VENDOR"><span>Artist A-Z</span></button>
+
+                <button type="button" class="btn-primary js-browse-filter-sorting" data-sort-value="sortKey: TITLE"><span>Album A-Z</span></button>
+
+                <button type="button" class="btn-primary js-browse-filter-sorting" data-sort-value="sortKey: CREATED_AT"><span>Newest</span></button>
+
+                <button type="button" class="btn-primary js-browse-filter-sorting" data-sort-value="sortKey: CREATED_AT, reverse: true"><span>Oldest</span></button>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+@{await Html.RenderPartialAsync("~/Views/Shared/_BannerTitle.cshtml", "Genres"); }
+
+<main role="main" id="content" class="container-fluid">
+    <div class="container mb-3 filter-buttons-container">
+        <div class="row">
+            <div class="button-flex">
+                @if (Model.Genres.Count > 0)
+                {
+                    @foreach (var genre in Model.Genres)
+                    {
+                        @*<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center mt-3">*@
+                        <button type="button" class="btn-primary js-browse-filter-genre" data-sort-value="@genre"><span>@genre</span></button>
+                        @*</div>*@
+                    }
+                }
+                else
+                {
+                    <p>@Model.Message</p>
+                }
+
+            </div>
+        </div>
+    </div>
+</main>
+
+@using (Html.BeginForm("ApplyFilter", "Browse", FormMethod.Post, new { enctype = "multipart/form-data", @id = "filter-form" }))
+{
+    @Html.HiddenFor(m => m.SortValue)
+
+    bool pageArtistFilter = ViewContext.HttpContext.Request.Query.ContainsKey("searchArtist");
+    bool pageAlbumFilter = ViewContext.HttpContext.Request.Query.ContainsKey("searchAlbum");
+    bool pageSearchFilter = ViewContext.HttpContext.Request.Query.ContainsKey("searchTerm");
+
+    if (pageArtistFilter)
+    {
+        <input type="hidden" name="SearchArtist" id="SearchArtist" value="@ViewContext.HttpContext.Request.Query["searchArtist"].ToString()" />
+    }
+
+    if (pageAlbumFilter)
+    {
+        <input type="hidden" name="SearchAlbum" id="SearchAlbum" value="@ViewContext.HttpContext.Request.Query["searchAlbum"].ToString()" />
+    }
+
+    if (pageSearchFilter)
+    {
+        <input type="hidden" name="SearchTerm" id="SearchTerm" value="@ViewContext.HttpContext.Request.Query["searchTerm"].ToString()" />
+    }
+}
+
+

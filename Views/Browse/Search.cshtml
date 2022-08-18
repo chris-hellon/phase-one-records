@@ -1,0 +1,38 @@
+﻿
+@model PhaseOneRecords.Models.BrowseFilterViewModel
+
+    <style>
+        header {
+            display: none !important;
+        }
+    </style>
+<main role="main" id="content" class="container-fluid">
+    <div class="container mb-3 filter-buttons-container">
+        <div class="vertical-center">
+            <div class="row">
+                <div class="button-flex">
+                    <a asp-action="landing" asp-controller="browse" style="text-align:center;">
+                        <img src="~/assets/UI/UI_Logo_L.png" />
+                    </a>
+                </div>
+            </div>
+            @using (Html.BeginForm("ApplyFilter", "Browse", FormMethod.Post, new { enctype = "multipart/form-data", @id = "search-form", style = "display:unset" }))
+            {
+                <div class="row" style="margin-top:20px;">
+                    <div class="button-flex">
+                        <button type="submit" class="btn-primary js-search"><span>SEARCH</span></button>
+
+                        <a asp-action="filter" asp-controller="browse" class="btn-primary"><span>FILTER</span></a>
+                    </div>
+                </div>
+                <div class="row">
+                    @Html.HiddenFor(m => m.SortValue)
+                    <input type="text" name="SearchTerm" style="display:none;" class="js-text-search" id="SearchTerm" value="@Model.SearchTerm" />
+                    <input class="input search-input js-search-input" readonly="readonly" />
+                    <div class="simple-keyboard"></div>
+                </div>
+            }
+        </div>
+        </div>
+</main>
+

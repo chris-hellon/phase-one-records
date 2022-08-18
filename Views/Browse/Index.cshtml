@@ -1,0 +1,88 @@
+﻿@model PhaseOneRecords.Models.BrowseViewModel
+
+@{
+    ViewData["Title"] = "Browse";
+}
+
+<div class="text-center light-blue-bg p-2 full-width-title">
+    <div class="border-spacer"></div>
+    @{
+        if (Model.PageTitle.Contains("//"))
+        {
+            string[] pageTitleSplit = Model.PageTitle.Split("//");
+            <h1 class="titling span-titling">@(pageTitleSplit[0])//<span>@(pageTitleSplit[1])</span></h1>
+        }
+        else
+        {
+            <h1 class="titling">@Model.PageTitle</h1>
+        }
+    }
+    <div class="border-spacer"></div>
+</div>
+
+<main role="main" id="content" class="container-fluid">
+    <section id="browse" class="pb-3 scrollable-container">
+        @Html.HiddenFor(w => w.Cursor)
+        @Html.HiddenFor(w => w.PageFrom)
+        @Html.HiddenFor(w => w.SearchTerm)
+        @Html.HiddenFor(w => w.SortValue)
+        @Html.HiddenFor(w => w.Genres)
+        @Html.HiddenFor(w => w.SearchArtist)
+        @Html.HiddenFor(w => w.SearchAlbum)
+
+        @if (Model.SearchAlbum != null && Model.SpotifyAlbum != null)
+        {
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="row mt-3">
+                            @{
+                                <iframe id="js-spotify-widget-frame" src="@("https://open.spotify.com/embed/album/" + Model.SpotifyAlbum.Id)" style="width:100%; max-height:100%;" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                            }
+                        </div>
+
+                    </div>
+                    <div class="col-lg-6" id="js-artist-blurb-frame">
+                        @{ await Html.RenderPartialAsync("~/Views/Browse/_Artist.cshtml", Model.Artists.First()); }
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="container js-artists-container">
+                @if (Model.Artists != null && Model.Artists.Count > 0)
+                {
+                    await Html.RenderPartialAsync("~/Views/Browse/_Artists.cshtml", Model.Artists);
+                }
+                else
+                {
+                    <div class="row">
+                        <div class="button-flex">
+                            <div class="no-results">
+                                <p>We couldn't find any artists that matched your criteria...</p>
+                                <a asp-action="Search" asp-controller="Browse" class="btn-primary">SEARCH AGAIN</a>
+                            </div>
+
+                        </div>
+                    </div>
+
+                }
+            </div>
+        }
+    </section>
+
+    @if (Model.RelatedArtists != null && Model.RelatedArtists.Count > 0)
+    {
+        await Html.RenderPartialAsync("~/Views/Shared/_BannerTitle.cshtml", "Related Artists");
+        <div class="container js-related-artists-container">
+            @{await Html.RenderPartialAsync("~/Views/Browse/_Artists.cshtml", Model.RelatedArtists);
+            }
+        </div>
+    }
+</main>
+
+
+@section Scripts {
+    <script src="~/js/browse.js" asp-append-version="true"></script>
+}
