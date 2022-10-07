@@ -17,7 +17,7 @@ Features of the Web App includes:
 * Consumption of a Spotify REST API
 * Storing Shopify response in session for faster loading
 
-Tech Stack inludes:
+Tech Stack includes:
 
 * .NET Core 3.1
 * C#
